@@ -10,8 +10,10 @@ import {
   validatePasswordConf,
   validateUsername,
 } from "../shared/validators";
+import { useRegister } from "../shared/hooks";
 
 export const Register = ({ switchAuthHandler }) => {
+  const {register, isLoading} = useRegister();
   const [formState, setFormState] = useState({
     email: {
       value: "",
@@ -74,6 +76,18 @@ export const Register = ({ switchAuthHandler }) => {
     }));
   };
 
+  const handleRegister = (event) => {
+    event.preventDefault();
+    register(formState.username.value, formState.email.value, formState.password.value);
+  }
+  const isSubmitButtonDisabled =
+    isLoading ||
+    !formState.password.isValid ||
+    !formState.email.isValid ||
+    !formState.username.isValid ||
+    formState.password.value !== formState.passwordConf.value;
+
+    
   return (
     <>
       <div className="flex flex-col justify-center w-full min-h-full px-6 py-12 lg:px-8">
@@ -123,6 +137,7 @@ export const Register = ({ switchAuthHandler }) => {
               showErrorMessage={formState.password.showError}
               validationMessage={passwordValidationMessage}
             />
+
             <AuthInput
               field="passwordConf"
               labelFor="passwordConf"
@@ -137,12 +152,8 @@ export const Register = ({ switchAuthHandler }) => {
 
             <div>
               <button
-                disabled={
-                  !formState.password.isValid ||
-                  !formState.email.isValid ||
-                  !formState.username.isValid ||
-                  !formState.password.value !== formState.passwordConf.value
-                }
+                onClick={handleRegister}
+                disabled={isSubmitButtonDisabled}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-indigo-300"
               >
                 Sign Up
@@ -150,15 +161,15 @@ export const Register = ({ switchAuthHandler }) => {
             </div>
           </form>
 
-          <p className="mt-10 text-sm text-center text-gray-500">
+          <p
+            onClick={switchAuthHandler}
+             className="mt-10 text-sm text-center text-gray-500"
+          >
             Already have an account?
-            <button
-              onClick={switchAuthHandler}
-              className="ml-2 font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
+            <span className="ml-2 font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               {" "}
               sign in
-            </button>
+            </span>
           </p>
         </div>
       </div>

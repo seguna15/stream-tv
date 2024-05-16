@@ -1,9 +1,10 @@
 import React, {  useState } from "react";
 import { AuthInput } from "./AuthInput";
 import { emailValidationMessage, passwordValidationMessage, validateEmail, validatePassword } from "../shared/validators";
+import { useLogin } from "../shared/hooks";
 
 export const Login = ({switchAuthHandler}) => {
-    
+    const {login, isLoading} = useLogin();
     const [formState, setFormState] = useState({
         email: {
             value: '',
@@ -51,6 +52,17 @@ export const Login = ({switchAuthHandler}) => {
         }))
     }
 
+    const handleLogin = (event) => {
+      event.preventDefault();
+      login(formState.email.value, formState.password.value);
+      
+    }
+
+    
+    const isSubmitButtonDisabled = isLoading || !formState.password.isValid || !formState.email.isValid;
+
+   
+
   return (
     <>
       <div className="flex flex-col justify-center w-full min-h-full px-6 py-12 lg:px-8">
@@ -97,9 +109,8 @@ export const Login = ({switchAuthHandler}) => {
             </div>
             <div>
               <button
-                disabled={
-                  !formState.password.isValid || !formState.email.isValid
-                }
+                onClick={handleLogin}
+                disabled={isSubmitButtonDisabled}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-indigo-300"
               >
                 Sign in
@@ -107,15 +118,15 @@ export const Login = ({switchAuthHandler}) => {
             </div>
           </form>
 
-          <p className="mt-10 text-sm text-center text-gray-500">
+          <p
+            onClick={switchAuthHandler}
+            className="mt-10 text-sm text-center text-gray-500"
+          >
             Not a member?
-            <button
-              onClick={switchAuthHandler}
-              className="ml-2 font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
+            <span className="ml-2 font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               {" "}
               sign up
-            </button>
+            </span>
           </p>
         </div>
       </div>
