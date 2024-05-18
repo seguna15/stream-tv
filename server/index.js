@@ -3,7 +3,9 @@ import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./connectDB.js";
-import authRoute from "./src/auth/auth.routes.js";
+import authRoutes from "./src/auth/auth.routes.js";
+import channelsRoutes from './src/channels/channels.routes.js';
+import settingsRoutes from './src/settings/settings.routes.js';
 
 dotenv.config();
 
@@ -19,7 +21,9 @@ app.get('/', (req, res) => {
     return res.send('Hello from your server');
 })
 
-app.use('/api/auth', authRoute);
+app.use('/api/auth', authRoutes);
+app.use('/api/channels', channelsRoutes);
+app.use('/api/settings/', settingsRoutes)
 
 const server = http.createServer(app);
 connectDB();
