@@ -1,5 +1,5 @@
 import React, {  useState } from "react";
-import { AuthInput } from "./AuthInput";
+import { Input } from "../shared/Components";
 import { emailValidationMessage, passwordValidationMessage, validateEmail, validatePassword } from "../shared/validators";
 import { useLogin } from "../shared/hooks";
 
@@ -79,7 +79,7 @@ export const Login = ({switchAuthHandler}) => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6">
-            <AuthInput
+            <Input
               field="email"
               labelFor="email"
               label="Email"
@@ -90,7 +90,7 @@ export const Login = ({switchAuthHandler}) => {
               showErrorMessage={formState.email.showError}
               validationMessage={emailValidationMessage}
             />
-            <AuthInput
+            <Input
               field="password"
               labelFor="password"
               label="Password"

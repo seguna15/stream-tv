@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AuthInput } from "./AuthInput";
+import { Input } from "../shared/Components";
 import {
   emailValidationMessage,
   passConfValidationMessage,
@@ -104,7 +104,7 @@ export const Register = ({ switchAuthHandler }) => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6">
-            <AuthInput
+            <Input
               field="username"
               labelFor="username"
               label="Username"
@@ -115,7 +115,7 @@ export const Register = ({ switchAuthHandler }) => {
               showErrorMessage={formState.username.showError}
               validationMessage={usernameValidationMessage}
             />
-            <AuthInput
+            <Input
               field="email"
               labelFor="email"
               label="Email"
@@ -126,7 +126,7 @@ export const Register = ({ switchAuthHandler }) => {
               showErrorMessage={formState.email.showError}
               validationMessage={emailValidationMessage}
             />
-            <AuthInput
+            <Input
               field="password"
               labelFor="password"
               label="Password"
@@ -138,7 +138,7 @@ export const Register = ({ switchAuthHandler }) => {
               validationMessage={passwordValidationMessage}
             />
 
-            <AuthInput
+            <Input
               field="passwordConf"
               labelFor="passwordConf"
               label="Password Confirmation"
