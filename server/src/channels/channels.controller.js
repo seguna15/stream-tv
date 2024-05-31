@@ -8,7 +8,7 @@ export const getChannelDetails  = async (req, res) => {
 
         const channel = await channelModel.findById(channelId);
 
-        if(!channel /*|| !channel.isActive*/) return res.status(404).send('Oops channel not found');
+        if(!channel || !channel.isActive) return res.status(404).send('Oops channel not found');
 
         const user = await UserModel.findOne({channel: channelId}, {username: 1});
 
@@ -43,11 +43,11 @@ export const getChannels = async (_, res) => {
                 title: user.channel.title,
                 avatarUrl: user.channel.avatarUrl,
                 username: user.username,
-                isOnline: false,
+                isOnline: user.channel.isActive,
             }
         })
 
-        return res.status(200).json(channels);
+        return res.status(200).json({channels});
     } catch (error) {
          console.log(error);
          return res

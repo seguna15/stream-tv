@@ -23,7 +23,7 @@ export const useLogin = () => {
 
         localStorage.setItem('user', JSON.stringify(userDetails));
 
-        navigate('/');
+        navigate('/channels');
     }
 
     return {

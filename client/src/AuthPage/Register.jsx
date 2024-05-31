@@ -12,6 +12,20 @@ import {
 } from "../shared/validators";
 import { useRegister } from "../shared/hooks";
 
+import logo from "../resources/images/logo-copy.svg";
+
+const NavLogo = () => {
+  return (
+    <img
+      src={logo}
+      alt="twitch tv"
+      title="twitch tv"
+      className="w-auto h-10 mx-auto"
+    />
+  );
+};
+
+
 export const Register = ({ switchAuthHandler }) => {
   const {register, isLoading} = useRegister();
   const [formState, setFormState] = useState({
@@ -92,11 +106,7 @@ export const Register = ({ switchAuthHandler }) => {
     <>
       <div className="flex flex-col justify-center w-full min-h-full px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="w-auto h-10 mx-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
+          <NavLogo/>
           <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">
             Sign up to create your account
           </h2>

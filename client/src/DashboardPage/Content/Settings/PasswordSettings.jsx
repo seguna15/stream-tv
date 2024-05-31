@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { passwordValidationMessage, validatePassword } from '../../../shared/validators';
 import { Input } from '../../../shared/Components/Input';
+import { useChangePassword } from '../../../shared/hooks';
 
 
 const inputs = [
@@ -20,6 +21,8 @@ const inputs = [
 
 
 export const PasswordSettings = () => {
+  const {changePassword} = useChangePassword();
+  
   const [formState, setFormState] = useState({
     password: {
       value: "",
@@ -69,8 +72,7 @@ export const PasswordSettings = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // TODO
-    // Save settings using http request
+    changePassword(formState.password.value, formState.newPassword.value)
   };
 
   const isSubmitFormButtonDisabled = !formState.password.isValid ||!formState.newPassword.isValid;
