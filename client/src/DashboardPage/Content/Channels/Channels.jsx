@@ -12,7 +12,7 @@ export const Channels = ({channels}) => {
   }
   
   return (
-    <div className='flex flex-wrap items-center justify-start gap-8 mt-4' >
+    <div className='flex flex-wrap items-center gap-8 mt-4 justify-evenly' >
         {
         channels.map((c) => (
             <ChannelCard key={c.id} id={c.id} title={c.title} username={c.username} isOnline={c.isOnline} avatarUrl={c.avatarUrl} navigateToChannelHandler={handleNavigateToChannel}/>

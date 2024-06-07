@@ -1,5 +1,6 @@
 import UserModel from "../users/User.model.js";
-import channelModel from "./channel.model.js";
+import channelModel from "./Channel.model.js";
+import { liveStreamArray } from "./channels.service.js";
 
 
 export const getChannelDetails  = async (req, res) => {
@@ -12,8 +13,9 @@ export const getChannelDetails  = async (req, res) => {
 
         const user = await UserModel.findOne({channel: channelId}, {username: 1});
 
-        const streamUrl = 'http';
-        const isOnline = false;
+        const streamUrl = `http://localhost:8000/live/${channel.streamKey}.flv`;
+        const liveStreams = await liveStreamArray()
+        const isOnline = liveStreams.includes(channel.streamKey);
 
         return res.status(200).json({success: true, channelDetails: {
             id: channel._id,
@@ -37,13 +39,17 @@ export const getChannels = async (_, res) => {
             channel: 1,
             username: 1,
         }).populate("channel")
+
+         const liveStreams = await liveStreamArray();
+         
+
         const channels = users.filter(user  => user.channel.isActive).map(user => {
             return {
                 id: user.channel._id,
                 title: user.channel.title,
                 avatarUrl: user.channel.avatarUrl,
                 username: user.username,
-                isOnline: user.channel.isActive,
+                isOnline: liveStreams.includes(user.channel.streamKey),
             }
         })
 

@@ -1,4 +1,4 @@
-import channelModel from "../channels/channel.model.js";
+import channelModel from "../channels/Channel.model.js";
 import UserModel from "../users/User.model.js";
 import bcrypt from 'bcrypt';
 

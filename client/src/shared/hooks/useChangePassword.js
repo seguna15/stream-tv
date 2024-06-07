@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 export const useChangePassword = () => {
 
   const changePassword = async (password, newPassword) => {
-    const response = changePasswordRequest({password, newPassword});
+    const response = await changePasswordRequest({password, newPassword});
     if (response.exception) {
       return toast.error(
         response.exception?.response?.data.message ||

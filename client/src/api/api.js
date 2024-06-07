@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiClient = axios.create({
     baseURL: "http://localhost:5002/api",
-    timeout: 1000,
+    timeout: 10000,
 });
 
 apiClient.interceptors.request.use(
@@ -94,6 +94,7 @@ export const getChannelsRequest = async () => {
     try {
         return await apiClient.get("/channels")
     } catch (exception) {
+        console.log(exception)
          return {
            error: true,
            exception,
