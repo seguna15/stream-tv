@@ -8,7 +8,7 @@ export const useFollowChannel = () => {
 
      if (response.exception) {
       console.log(response.exception)
-       return toast(
+       return toast.error(
          response.exception?.response?.data.message ||
            "Error occurred when fetching channel details"
        );
