@@ -3,9 +3,15 @@ import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./connectDB.js";
+
+import MessageModel from './src/messages/Message.model.js'
+import UserModel from "./src/users/User.model.js";
+import ChannelModel from "./src/channels/Channel.model.js";
+
 import authRoutes from "./src/auth/auth.routes.js";
 import channelsRoutes from './src/channels/channels.routes.js';
 import settingsRoutes from './src/settings/settings.routes.js';
+import { registerSocketServer } from "./src/io/io.js";
 
 dotenv.config();
 
@@ -26,6 +32,7 @@ app.use('/api/channels', channelsRoutes);
 app.use('/api/settings/', settingsRoutes)
 
 const server = http.createServer(app);
+registerSocketServer(server)
 connectDB();
 server.listen(PORT, () => {
     console.log(`Server is listening on ${PORT}`);

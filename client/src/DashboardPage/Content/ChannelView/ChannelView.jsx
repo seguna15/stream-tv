@@ -50,7 +50,7 @@ export const ChannelView = ({ getChannels }) => {
           getChannels={getChannels}
         />
       </div>
-      <Chat />
+      <Chat channelId={channelDetails.id} />
     </div>
   );
 };

@@ -6,3 +6,4 @@ export * from './useChangePassword';
 export * from './useChannels'
 export * from './useChannelDetails'
 export * from './useFollowChannel'
+export * from './useChatHistory'

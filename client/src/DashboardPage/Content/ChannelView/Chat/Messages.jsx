@@ -39,7 +39,7 @@ const Message = ({author, content}) => {
 
 export const Messages = () => {
   return (
-    <div className='flex flex-col h-[500px]'>
+    <div className='flex flex-col h-[500px] dark:bg-slate-700'>
       {
         messages.length > 0 && messages.map(message => <Message key={message.id} author={message.author} content={message.content} />)
       }

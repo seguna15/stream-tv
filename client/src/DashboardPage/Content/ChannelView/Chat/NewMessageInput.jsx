@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const NewMessageInput = () => {
+export const NewMessageInput = ({sendMessage}) => {
   const [messageContent, setMessageContent] = useState('')
 
   const handleValueChange = (e) => {
@@ -10,9 +10,12 @@ export const NewMessageInput = () => {
 
   const handleSendMessage = () => {
     //set message to server
-
-    //after sending message reset input
-    setMessageContent('')
+    if(messageContent.length > 0){
+      sendMessage(messageContent);
+      //after sending message reset input
+      setMessageContent("");
+    }
+    
   }
 
   const handleKeyPress = (e) => {
