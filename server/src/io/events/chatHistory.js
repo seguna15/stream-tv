@@ -10,7 +10,8 @@ export const emitChatHistory = async (socket, channelId) => {
                 channelId: channel.id,
                 messages: channel.messages.map(m => ({
                     author: m.author,
-                    content: m.content
+                    content: m.content,
+                    date: m.date
                 }))
             })
         }

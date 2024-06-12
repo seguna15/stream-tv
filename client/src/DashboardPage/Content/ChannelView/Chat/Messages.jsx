@@ -1,32 +1,6 @@
 import React from 'react'
 
-const messages = [
-  {
-    id: 1,
-    author: 'John',
-    content:  'Hello world'
-  },
-  {
-    id: 2,
-    author: 'John',
-    content:  'Hello world'
-  },
-  {
-    id: 3,
-    author: 'John',
-    content:  'Hello world'
-  },
-  {
-    id: 4,
-    author: 'John',
-    content:  'Hello world'
-  },
-  {
-    id: 5,
-    author: 'John',
-    content:  'Hello world'
-  },
-]
+
 
 const Message = ({author, content}) => {
   return <span className='flex flex-col text-base'>
@@ -37,11 +11,11 @@ const Message = ({author, content}) => {
   </span>; 
 }
 
-export const Messages = () => {
+export const Messages = ({messages}) => {
   return (
-    <div className='flex flex-col h-[500px] dark:bg-slate-700'>
+    <div className='flex flex-col relative bottom-0 h-[600px] dark:bg-slate-700 overflow-y-scroll'>
       {
-        messages.length > 0 && messages.map(message => <Message key={message.id} author={message.author} content={message.content} />)
+        messages.length > 0 && messages.map(message => <Message key={`${message.author}-${message.content}-${message.date}`} author={message.author} content={message.content} />)
       }
     </div>
   )
